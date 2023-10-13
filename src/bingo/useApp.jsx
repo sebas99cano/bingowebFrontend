@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { io } from "socket.io-client";
-
+const URI = "https://bingowebbackend.onrender.com/";
 const useApp = () => {
   const [originalCard, setOriginalCard] = useState([]);
   const [userCard, setUserCard] = useState([]);
@@ -15,7 +15,7 @@ const useApp = () => {
   useEffect(() => {
     if (!socketRef.current) {
       setGamePaused(true);
-      socketRef.current = io("ws://localhost:3002");
+      socketRef.current = io(URI);
       socketRef.current.on("initialValues", (initialValues) => {
         setOriginalCard(initialValues.card);
         setBalls(initialValues.balls);
